@@ -3,301 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mystic Mushroom Sanctuary | Грибы как искусство</title>
-    <style>
-        /* === ОСНОВНЫЕ НАСТРОЙКИ === */
-        :root {
-            --deep-green: #1e3b2a;
-            --moss: #5a8c6e;
-            --gold: #c8a97e;
-            --ivory: #f0e6d2;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-
-        @font-face {
-            font-family: 'OldStandard';
-            src: url('https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap');
-        }
-
-        body {
-            font-family: 'OldStandard', serif;
-            background-color: var(--ivory);
-            color: #333;
-            line-height: 1.8;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(200, 169, 126, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(94, 140, 110, 0.05) 0%, transparent 20%);
-        }
-
-        /* === ШАПКА В СТИЛЕ СТАРОЙ ГРАВЮРЫ === */
-        header {
-            background: 
-                linear-gradient(rgba(30, 59, 42, 0.9), rgba(30, 59, 42, 0.95)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,50 Q35,20 50,50 Q65,80 80,50" fill="none" stroke="%23c8a97e" stroke-width="0.5" opacity="0.3"/></svg>');
-            color: var(--ivory);
-            padding: 5rem 0 8rem;
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
-            position: relative;
-        }
-
-        header::after {
-            content: "";
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%231e3b2a"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%231e3b2a"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%231e3b2a"/></svg>');
-            background-size: cover;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 400;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px var(--shadow);
-            position: relative;
-            display: inline-block;
-        }
-
-        h1::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 25%;
-            width: 50%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--gold), transparent);
-        }
-
-        /* === ГРИБНЫЕ "РЕЛИКВИИ" === */
-        .relics-container {
-            max-width: 1300px;
-            margin: -4rem auto 5rem;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            perspective: 1000px;
-        }
-
-        .relic-card {
-            background: white;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px var(--shadow);
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .relic-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .relic-image {
-            height: 280px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .relic-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1s;
-        }
-
-        .relic-card:hover .relic-image img {
-            transform: scale(1.03);
-        }
-
-        .relic-details {
-            padding: 2rem;
-            position: relative;
-            background: white;
-        }
-
-        .relic-name {
-            font-size: 1.8rem;
-            color: var(--deep-green);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .relic-origin {
-            font-style: italic;
-            color: var(--moss);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .relic-price {
-            font-size: 1.8rem;
-            color: var(--gold);
-            margin: 1.5rem 0;
-            font-weight: 700;
-        }
-
-        .relic-description {
-            color: #666;
-            margin-bottom: 2rem;
-        }
-
-        .acquire-btn {
-            background: transparent;
-            color: var(--deep-green);
-            border: 2px solid var(--deep-green);
-            padding: 0.8rem 2rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .acquire-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(200, 169, 126, 0.2), transparent);
-            transition: all 0.5s;
-        }
-
-        .acquire-btn:hover {
-            background: var(--deep-green);
-            color: white;
-        }
-
-        .acquire-btn:hover::before {
-            left: 100%;
-        }
-
-        /* === МАГИЧЕСКИЕ ДЕТАЛИ === */
-        .relic-card::after {
-            content: "";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 40px;
-            height: 40px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%235a8c6e" d="M12,2L4,12L12,22L20,12L12,2Z"/></svg>');
-            opacity: 0.3;
-            transition: all 0.3s;
-        }
-
-        .relic-card:hover::after {
-            transform: rotate(15deg);
-            opacity: 0.6;
-        }
-
-        /* === ФУТЕР В СТИЛЕ АЛХИМИЧЕСКОГО ТРАКТАТА === */
-        footer {
-            background: var(--deep-green);
-            color: var(--ivory);
-            padding: 5rem 0 3rem;
-            text-align: center;
-            position: relative;
-            clip-path: polygon(0 20%, 50% 0, 100% 20%, 100% 100%, 0 100%);
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .footer-sigil {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 2rem;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23c8a97e" stroke-width="2"/><path d="M30,50 Q50,20 70,50 Q50,80 30,50 Z" fill="none" stroke="%23c8a97e" stroke-width="1"/></svg>');
-        }
-
-        .copyright {
-            margin-top: 3rem;
-            color: rgba(240, 230, 210, 0.6);
-            font-size: 0.9rem;
-        }
-
-        /* === АДАПТИВНОСТЬ === */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            .relics-container {
-                grid-template-columns: 1fr;
-                margin-top: -2rem;
-            }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Элитные грибы для настоящих ценителей">
+    <title>Mystic Mushroom Emporium</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="images/logo.png">
 </head>
 <body>
-    <header>
-        <h1>Mystic Mushroom Sanctuary</h1>
-        <p>Где природа становится искусством</p>
+    <header class="main-header">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Логотип Mystic Mushroom Emporium" class="logo">
+            <h1>Mystic Mushroom Emporium</h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#products">Каталог</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="relics-container">
-        <!-- Мухомор как священный артефакт -->
-        <div class="relic-card">
-            <div class="relic-image">
-                <img src="https://i.imgur.com/JK5x0Wm.jpg" alt="Священный мухомор">
+    <main>
+        <section id="products" class="products-section">
+            <h2>Наши грибы</h2>
+            <div class="products-grid">
+                <article class="product-card">
+                    <img src="images/amanita-muscaria.jpg" alt="Мухомор красный">
+                    <h3>Мухомор красный</h3>
+                    <p class="price">1,850 ₽ / 50г</p>
+                    <button class="buy-btn">В корзину</button>
+                </article>
+                <!-- Другие карточки продуктов -->
             </div>
-            <div class="relic-details">
-                <h3 class="relic-name">Красный Оракул</h3>
-                <span class="relic-origin">Amanita muscaria var. sanctum</span>
-                <p class="relic-description">Собран шаманами в полнолуние. Каждый экземпляр проходит ритуал очищения и сушится на оленьей шкуре.</p>
-                <div class="relic-price">2,400 ₽</div>
-                <button class="acquire-btn">Приобрести реликвию</button>
-            </div>
-        </div>
+        </section>
+    </main>
 
-        <!-- Пантерный мухомор -->
-        <div class="relic-card">
-            <div class="relic-image">
-                <img src="https://i.imgur.com/8mQ3b9x.jpg" alt="Теневой страж">
-            </div>
-            <div class="relic-details">
-                <h3 class="relic-name">Теневой Страж</h3>
-                <span class="relic-origin">Amanita pantherina obscura</span>
-                <p class="relic-description">Найден в глубинах хвойных лесов. Обработан по старинной технологии с использованием древесного угля.</p>
-                <div class="relic-price">3,100 ₽</div>
-                <button class="acquire-btn">Приобрести реликвию</button>
-            </div>
-        </div>
-
-        <!-- Ежовик -->
-        <div class="relic-card">
-            <div class="relic-image">
-                <img src="https://i.imgur.com/vVZQ2YF.jpg" alt="Грибная мантия">
-            </div>
-            <div class="relic-details">
-                <h3 class="relic-name">Грибная Мантия</h3>
-                <span class="relic-origin">Hericium erinaceus</span>
-                <p class="relic-description">Выращен на стволах священных дубов. Собирается только серебряным ножом при восходе солнца.</p>
-                <div class="relic-price">4,800 ₽</div>
-                <button class="acquire-btn">Приобрести реликвию</button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-sigil"></div>
-            <p>Тайные знания передаются только достойным</p>
-            <p>Свяжитесь с хранителем: <a href="mailto:keeper@mysticmushrooms.com" style="color: var(--gold);">keeper@mysticmushrooms.com</a></p>
-            <div class="copyright">
-                © Mystic Mushroom Sanctuary. Все ритуалы защищены.
-            </div>
-        </div>
+    <footer class="main-footer">
+        <p>&copy; 2023 Mystic Mushroom Emporium</p>
     </footer>
+
+    <script src="js/man.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
 </body>
 </html>
