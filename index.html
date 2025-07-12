@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 PSYCHEDELIC MUSHROOM EMPORIUM</title>
+    <style>
+        /* === ГЛОБАЛЬНЫЙ СБРОС === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* === ОСНОВНОЙ СТИЛЬ === */
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #0f0;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%230f0" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>'), auto;
+        }
+
+        /* === КИБЕРПАНК-ШАПКА === */
+        header {
+            background: linear-gradient(135deg, #000, #111);
+            border-bottom: 3px solid #0f0;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="%230f0" stroke-width="1" fill="none"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 L100,50 M50,0 L50,100" stroke="%230f0" stroke-width="0.5" opacity="0.3"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            letter-spacing: 5px;
+            position: relative;
+            z-index: 1;
+            animation: glitch 2s infinite alternate;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
+        /* === НАВИГАЦИЯ В СТИЛЕ ТЕРМИНАЛА === */
+        nav {
+            background: #111;
+            padding: 1rem;
+            border-bottom: 1px dashed #0f0;
+        }
+
+        .terminal-nav {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .terminal-nav li {
+            margin: 0 1.5rem;
+            position: relative;
+        }
+
+        .terminal-nav a {
+            color: #0f0;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border: 1px solid #0f0;
+            transition: all 0.3s;
+        }
+
+        .terminal-nav a:hover {
+            background: #0f0;
+            color: #000;
+            box-shadow: 0 0 10px #0f0;
+        }
+
+        /* === ГРИБНЫЕ КАРТОЧКИ В СТИЛЕ МАТРИЦЫ === */
+        .mushroom-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .mushroom-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #0f0;
+            border-radius: 0;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s;
+        }
+
+        .mushroom-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #0f0;
+        }
+
+        .mushroom-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,100 M0,100 L100,0" stroke="%230f0" stroke-width="0.5" opacity="0.3"/></svg>');
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .mushroom-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: grayscale(50%) contrast(120%);
+            transition: all 0.5s;
+        }
+
+        .mushroom-card:hover .mushroom-img {
+            filter: hue-rotate(90deg) brightness(120%);
+        }
+
+        .mushroom-info {
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .mushroom-name {
+            font-size: 1.5rem;
+            color: #0f0;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .mushroom-price {
+            font-size: 1.8rem;
+            color: #0f0;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .mushroom-desc {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .buy-btn {
+            background: #0f0;
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .buy-btn:hover {
+            background: #000;
+            color: #0f0;
+            box-shadow: 0 0 10px #0f0;
+        }
+
+        /* === ФУТЕР В СТИЛЕ ХАКЕРСКОГО ТЕРМИНАЛА === */
+        footer {
+            background: #000;
+            border-top: 3px solid #0f0;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: "ACCESS GRANTED";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            color: #0f0;
+            padding: 0 1rem;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+
+        .terminal-output {
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 1rem;
+            white-space: pre;
+            animation: terminal 5s infinite steps(40);
+            overflow: hidden;
+            border-right: 2px solid #0f0;
+        }
+
+        @keyframes terminal {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* === АНИМАЦИЯ МАТРИЦЫ НА ФОНЕ === */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* === 3D-ГРИБЫ (CSS 3D TRANSFORM) === */
+        .mushroom-3d {
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            transform-style: preserve-3d;
+            animation: rotate3d 10s infinite linear;
+        }
+
+        @keyframes rotate3d {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* === АДАПТИВНОСТЬ === */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .terminal-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .terminal-nav li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- МАТРИЧНЫЙ ФОН -->
+    <canvas id="matrix" class="matrix-bg"></canvas>
+
+    <!-- 3D-ГРИБ -->
+    <div class="mushroom-3d">
+        <div style="transform: rotateY(0deg) translateZ(50px); position: absolute; width: 100%; height: 100%; background: #0f0; opacity: 0.8;"></div>
+        <div style="transform: rotateY(90deg) translateZ(50px); position: absolute; width: 100%; height: 100%; background: #f0f; opacity: 0.8;"></div>
+        <div style="transform: rotateY(180deg) translateZ(50px); position: absolute; width: 100%; height: 100%; background: #0ff; opacity: 0.8;"></div>
+        <div style="transform: rotateY(270deg) translateZ(50px); position: absolute; width: 100%; height: 100%; background: #ff0; opacity: 0.8;"></div>
+    </div>
+
+    <!-- ШАПКА -->
+    <header>
+        <h1>🌀 PSYCHEDELIC MUSHROOM EMPORIUM</h1>
+    </header>
+
+    <!-- НАВИГАЦИЯ -->
+    <nav>
+        <ul class="terminal-nav">
+            <li><a href="#">ГЛАВНАЯ</a></li>
+            <li><a href="#">КАТАЛОГ</a></li>
+            <li><a href="#">О НАС</a></li>
+            <li><a href="#">ДОСТАВКА</a></li>
+            <li><a href="#">КОНТАКТЫ</a></li>
+        </ul>
+    </nav>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="mushroom-matrix">
+        <!-- КАРТОЧКА 1 -->
+        <div class="mushroom-card">
+            <img src="https://i.imgur.com/JK5x0Wm.jpg" alt="Мухомор красный" class="mushroom-img">
+            <div class="mushroom-info">
+                <h3 class="mushroom-name">МУХОМОР КРАСНЫЙ</h3>
+                <div class="mushroom-price">1,850 ₽ / 50г</div>
+                <p class="mushroom-desc">Классический красный мухомор с белыми пятнами. Собран в экологически чистых лесах Карелии.</p>
+                <button class="buy-btn">КУПИТЬ</button>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 2 -->
+        <div class="mushroom-card">
+            <img src="https://i.imgur.com/8mQ3b9x.jpg" alt="Мухомор пантерный" class="mushroom-img">
+            <div class="mushroom-info">
+                <h3 class="mushroom-name">МУХОМОР ПАНТЕРНЫЙ</h3>
+                <div class="mushroom-price">2,300 ₽ / 50г</div>
+                <p class="mushroom-desc">Темно-коричневый мухомор с характерными хлопьями. Редкий экземпляр.</p>
+                <button class="buy-btn">КУПИТЬ</button>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 3 -->
+        <div class="mushroom-card">
+            <img src="https://i.imgur.com/vVZQ2YF.jpg" alt="Ежовик" class="mushroom-img">
+            <div class="mushroom-info">
+                <h3 class="mushroom-name">ЕЖОВИК ГРЕБЕНЧАТЫЙ</h3>
+                <div class="mushroom-price">3,750 ₽ / 50г</div>
+                <p class="mushroom-desc">Уникальный гриб с нежным вкусом. Используется в народной медицине.</p>
+                <button class="buy-btn">КУПИТЬ</button>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 4 -->
+        <div class="mushroom-card">
+            <img src="https://i.imgur.com/qXQvW9B.jpg" alt="Трюфель" class="mushroom-img">
+            <div class="mushroom-info">
+                <h3 class="mushroom-name">ТРЮФЕЛЬ ЧЕРНЫЙ</h3>
+                <div class="mushroom-price">12,500 ₽ / 50г</div>
+                <p class="mushroom-desc">Царь грибов с непревзойденным ароматом. Гарантия подлинности.</p>
+                <button class="buy-btn">КУПИТЬ</button>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 5 -->
+        <div class="mushroom-card">
+            <img src="https://i.imgur.com/5tKJ7Zc.jpg" alt="Гриб-баран" class="mushroom-img">
+            <div class="mushroom-info">
+                <h3 class="mushroom-name">ГРИБ-БАРАН</h3>
+                <div class="mushroom-price">4,200 ₽ / 50г</div>
+                <p class="mushroom-desc">Огромный съедобный гриб, достигающий 10 кг весом. Дальневосточный.</p>
+                <button class="buy-btn">КУПИТЬ</button>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 6 -->
+        <div class="mushroom-card">
+            <img src="https://i.imgur.com/9zVYQ0H.jpg" alt="Сморчок" class="mushroom-img">
+            <div class="mushroom-info">
+                <h3 class="mushroom-name">СМОРЧОК СЪЕДОБНЫЙ</h3>
+                <div class="mushroom-price">5,800 ₽ / 50г</div>
+                <p class="mushroom-desc">Один из самых дорогих грибов в мире с уникальной структурой.</p>
+                <button class="buy-btn">КУПИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer>
+        <div class="terminal-output">
+            > SYSTEM INITIALIZED...
+            > CONNECTING TO DARKNET...
+            > ACCESS GRANTED...
+            > WELCOME TO PSYCHEDELIC MUSHROOM EMPORIUM
+        </div>
+        <p style="color: #0f0;">© 2023 PSYCHEDELIC MUSHROOM EMPORIUM. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <!-- СКРИПТ МАТРИЦЫ -->
+    <script>
+        // Matrix background
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+        
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        
+        const rainDrops = [];
+        
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+        
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0f0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        
+        setInterval(draw, 30);
+        
+        // Glitch effect
+        window.addEventListener('mousemove', (e) => {
+            const glitch = document.createElement('div');
+            glitch.style.position = 'fixed';
+            glitch.style.left = e.clientX + 'px';
+            glitch.style.top = e.clientY + 'px';
+            glitch.style.width = '20px';
+            glitch.style.height = '20px';
+            glitch.style.background = '#0f0';
+            glitch.style.borderRadius = '50%';
+            glitch.style.opacity = '0.7';
+            glitch.style.pointerEvents = 'none';
+            glitch.style.zIndex = '9999';
+            glitch.style.boxShadow = '0 0 10px #0f0';
+            document.body.appendChild(glitch);
+            
+            setTimeout(() => {
+                glitch.style.transform = 'scale(0)';
+                glitch.style.opacity = '0';
+                setTimeout(() => glitch.remove(), 300);
+            }, 100);
+        });
+    </script>
+</body>
+</html>
