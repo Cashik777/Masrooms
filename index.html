@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Грибной Эдем | Элитные мухоморы и редкие грибы</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@300;500&display=swap">
+    <style>
+        :root {
+            --primary: #2a5c45;
+            --secondary: #5d4037;
+            --accent: #d84315;
+            --light: #f5f5f0;
+            --gold: #c8a97e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light);
+            color: #333;
+            overflow-x: hidden;
+            background-image: url('https://i.imgur.com/ZYwDk6a.png');
+            background-attachment: fixed;
+            background-size: 30%;
+            background-blend-mode: overlay;
+            background-color: rgba(245, 245, 240, 0.9);
+        }
+        
+        /* Шапка в стиле лесной поляны */
+        header {
+            background: linear-gradient(to bottom, var(--primary), #1a3a2a);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%232a5c45"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%232a5c45"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%232a5c45"/></svg>');
+            background-size: cover;
+            z-index: 1;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+        
+        /* Навигация с элементами грибов */
+        nav {
+            background-color: rgba(42, 92, 69, 0.9);
+            backdrop-filter: blur(5px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gold);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo::before {
+            content: "🍄";
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+        
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Грибные споры в качестве декоративных элементов */
+        .mushroom-spore {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+        }
+        
+        /* Сетка товаров с грибными рамками */
+        .mushroom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .mushroom-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .mushroom-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        /* Сложная рамка в форме гриба с SVG */
+        .mushroom-frame {
+            position: relative;
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f9f9f5 0%, #ffffff 100%);
+            clip-path: url(#mushroomClip);
+        }
+        
+        .mushroom-img-container {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mushroom-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+            z-index: 2;
+        }
+        
+        .mushroom-card:hover .mushroom-img {
+            transform: scale(1.05);
+        }
+        
+        /* Декоративные грибы вокруг карточки */
+        .mushroom-decoration {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            z-index: -1;
+            transition: all 0.4s ease;
+        }
+        
+        .mushroom-card:hover .mushroom-decoration {
+            opacity: 1;
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        .decoration-1 {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,20 Q70,10 80,30 L80,70 Q70,90 50,80 Q30,90 20,70 L20,30 Q30,10 50,20 Z" fill="%23d84315"/><circle cx="35" cy="30" r="5" fill="white"/><circle cx="65" cy="30" r="5" fill="white"/></svg>');
+            top: -15px;
+            left: -15px;
+        }
+        
+        .decoration-2 {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,30 Q60,20 70,40 L70,60 Q60,80 50,70 Q40,80 30,60 L30,40 Q40,20 50,30 Z" fill="%235d4037"/></svg>');
+            bottom: -10px;
+            right: -10px;
+        }
+        
+        .decoration-3 {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,20 Q60,10 70,20 L70,50 Q60,60 50,50 Q40,60 30,50 L30,20 Q40,10 50,20 Z" fill="%232a5c45"/></svg>');
+            top: 50%;
+            left: -20px;
+            transform: translateY(-50%);
+        }
+        
+        .mushroom-info {
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            background-color: white;
+        }
+        
+        .mushroom-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .mushroom-latin {
+            font-style: italic;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .mushroom-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 1rem 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .mushroom-price::before {
+            content: "₽";
+            margin-right: 5px;
+        }
+        
+        .mushroom-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .mushroom-properties {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .property-tag {
+            background-color: var(--light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(42, 92, 69, 0.2);
+        }
+        
+        .add-to-cart {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(42, 92, 69, 0.3);
+        }
+        
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(42, 92, 69, 0.4);
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+        }
+        
+        .add-to-cart::before {
+            content: "🛒";
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        /* Футер в стиле лесной подстилки */
+        footer {
+            background: linear-gradient(to bottom, #1a3a2a, #0f261c);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+            margin-top: 5rem;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%231a3a2a"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%231a3a2a"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%231a3a2a"/></svg>');
+            background-size: cover;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 1px;
+            background-color: var(--gold);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--gold);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Анимация грибных спор */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 1rem;
+            }
+            
+            .mushroom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG клип-путь для формы гриба -->
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <clipPath id="mushroomClip" clipPathUnits="objectBoundingBox">
+                <path d="M0.5,0.2 C0.6,0.1 0.7,0.1 0.8,0.2 L0.8,0.8 C0.7,0.9 0.5,0.95 0.3,0.8 L0.3,0.2 C0.4,0.1 0.45,0.1 0.5,0.2 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+    
+    <!-- Грибные споры (генерируются через JS) -->
+    <div id="spores-container"></div>
+    
+    <header>
+        <div class="header-content">
+            <h1>Грибной Эдем</h1>
+            <p class="tagline">Редкие грибы для истинных ценителей</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Грибной Эдем</a>
+            <ul class="nav-links">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Каталог</a></li>
+                <li><a href="#">Коллекции</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h2 class="section-title">Элитные грибы</h2>
+        
+        <div class="mushroom-grid">
+            <!-- Мухомор красный -->
+            <div class="mushroom-card">
+                <div class="mushroom-decoration decoration-1"></div>
+                <div class="mushroom-decoration decoration-2"></div>
+                <div class="mushroom-decoration decoration-3"></div>
+                
+                <div class="mushroom-frame">
+                    <div class="mushroom-img-container">
+                        <img src="https://i.imgur.com/JK5x0Wm.jpg" alt="Мухомор красный" class="mushroom-img">
+                    </div>
+                </div>
+                
+                <div class="mushroom-info">
+                    <h3 class="mushroom-name">Мухомор красный</h3>
+                    <p class="mushroom-latin">Amanita muscaria</p>
+                    
+                    <div class="mushroom-properties">
+                        <span class="property-tag">Эксклюзив</span>
+                        <span class="property-tag">Северный сбор</span>
+                        <span class="property-tag">Эко-сушилка</span>
+                    </div>
+                    
+                    <p class="mushroom-desc">Легендарный гриб с ярко-красной шляпкой и белыми хлопьями. Собран в экологически чистых лесах Карелии. Идеален для коллекционеров и ценителей.</p>
+                    
+                    <div class="mushroom-price">1,850</div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+            </div>
+            
+            <!-- Мухомор пантерный -->
+            <div class="mushroom-card">
+                <div class="mushroom-decoration decoration-1"></div>
+                <div class="mushroom-decoration decoration-2"></div>
+                <div class="mushroom-decoration decoration-3"></div>
+                
+                <div class="mushroom-frame">
+                    <div class="mushroom-img-container">
+                        <img src="https://i.imgur.com/8mQ3b9x.jpg" alt="Мухомор пантерный" class="mushroom-img">
+                    </div>
+                </div>
+                
+                <div class="mushroom-info">
+                    <h3 class="mushroom-name">Мухомор пантерный</h3>
+                    <p class="mushroom-latin">Amanita pantherina</p>
+                    
+                    <div class="mushroom-properties">
+                        <span class="property-tag">Редкость</span>
+                        <span class="property-tag">Горный сбор</span>
+                        <span class="property-tag">Вакуумная упаковка</span>
+                    </div>
+                    
+                    <p class="mushroom-desc">Темно-коричневый мухомор с характерными белыми хлопьями. Собран в предгорьях Кавказа. Особо ценится знатоками за свою редкость.</p>
+                    
+                    <div class="mushroom-price">2,300</div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+            </div>
+            
+            <!-- Ежовик гребенчатый -->
+            <div class="mushroom-card">
+                <div class="mushroom-decoration decoration-1"></div>
+                <div class="mushroom-decoration decoration-2"></div>
+                <div class="mushroom-decoration decoration-3"></div>
+                
+                <div class="mushroom-frame">
+                    <div class="mushroom-img-container">
+                        <img src="https://i.imgur.com/vVZQ2YF.jpg" alt="Ежовик гребенчатый" class="mushroom-img">
+                    </div>
+                </div>
+                
+                <div class="mushroom-info">
+                    <h3 class="mushroom-name">Ежовик гребенчатый</h3>
+                    <p class="mushroom-latin">Hericium erinaceus</p>
+                    
+                    <div class="mushroom-properties">
+                        <span class="property-tag">Деликатес</span>
+                        <span class="property-tag">Премиум-сорт</span>
+                        <span class="property-tag">Гурман</span>
+                    </div>
+                    
+                    <p class="mushroom-desc">Уникальный гриб с нежным вкусом, напоминающим морепродукты. Выращен на специальной плантации с соблюдением всех экологических норм.</p>
+                    
+                    <div class="mushroom-price">3,750</div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+            </div>
+            
+            <!-- Трюфель черный -->
+            <div class="mushroom-card">
+                <div class="mushroom-decoration decoration-1"></div>
+                <div class="mushroom-decoration decoration-2"></div>
+                <div class="mushroom-decoration decoration-3"></div>
+                
+                <div class="mushroom-frame">
+                    <div class="mushroom-img-container">
+                        <img src="https://i.imgur.com/qXQvW9B.jpg" alt="Трюфель черный" class="mushroom-img">
+                    </div>
+                </div>
+                
+                <div class="mushroom-info">
+                    <h3 class="mushroom-name">Трюфель черный</h3>
+                    <p class="mushroom-latin">Tuber melanosporum</p>
+                    
+                    <div class="mushroom-properties">
+                        <span class="property-tag">Элита</span>
+                        <span class="property-tag">Французский</span>
+                        <span class="property-tag">Грамм</span>
+                    </div>
+                    
+                    <p class="mushroom-desc">Король грибов с непревзойденным ароматом. Добыт с помощью обученных собак в Перигоре (Франция). Гарантия подлинности с сертификатом.</p>
+                    
+                    <div class="mushroom-price">12,500</div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+            </div>
+            
+            <!-- Гриб-баран -->
+            <div class="mushroom-card">
+                <div class="mushroom-decoration decoration-1"></div>
+                <div class="mushroom-decoration decoration-2"></div>
+                <div class="mushroom-decoration decoration-3"></div>
+                
+                <div class="mushroom-frame">
+                    <div class="mushroom-img-container">
+                        <img src="https://i.imgur.com/5tKJ7Zc.jpg" alt="Гриб-баран" class="mushroom-img">
+                    </div>
+                </div>
+                
+                <div class="mushroom-info">
+                    <h3 class="mushroom-name">Гриб-баран</h3>
+                    <p class="mushroom-latin">Grifola frondosa</p>
+                    
+                    <div class="mushroom-properties">
+                        <span class="property-tag">Гигант</span>
+                        <span class="property-tag">Дальневосточный</span>
+                        <span class="property-tag">Редкость</span>
+                    </div>
+                    
+                    <p class="mushroom-desc">Огромный съедобный гриб, достигающий 10 кг весом. Собран в девственных лесах Приморья. Обладает уникальными полезными свойствами.</p>
+                    
+                    <div class="mushroom-price">4,200</div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+            </div>
+            
+            <!-- Сморчок съедобный -->
+            <div class="mushroom-card">
+                <div class="mushroom-decoration decoration-1"></div>
+                <div class="mushroom-decoration decoration-2"></div>
+                <div class="mushroom-decoration decoration-3"></div>
+                
+                <div class="mushroom-frame">
+                    <div class="mushroom-img-container">
+                        <img src="https://i.imgur.com/9zVYQ0H.jpg" alt="Сморчок съедобный" class="mushroom-img">
+                    </div>
+                </div>
+                
+                <div class="mushroom-info">
+                    <h3 class="mushroom-name">Сморчок съедобный</h3>
+                    <p class="mushroom-latin">Morchella esculenta</p>
+                    
+                    <div class="mushroom-properties">
+                        <span class="property-tag">Весенний</span>
+                        <span class="property-tag">Деликатес</span>
+                        <span class="property-tag">Гурман</span>
+                    </div>
+                    
+                    <p class="mushroom-desc">Один из самых дорогих грибов в мире с уникальной ячеистой структурой. Собран вручную в лиственных лесах средней полосы России.</p>
+                    
+                    <div class="mushroom-price">5,800</div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Грибной Эдем</h3>
+                <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">Мы предлагаем эксклюзивные грибы для самых требовательных ценителей. Каждый экземпляр проходит строгий отбор и проверку качества.</p>
+                <div class="social-links">
+                    <a href="#">📱</a>
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                    <a href="#">📹</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Каталог</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Мухоморы</a></li>
+                    <li><a href="#">Трюфели</a></li>
+                    <li><a href="#">Экзотические виды</a></li>
+                    <li><a href="#">Сезонные предложения</a></li>
+                    <li><a href="#">Коллекционные экземпляры</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Информация</h3>
+                <ul class="footer-links">
+                    <li><a href="#">О компании</a></li>
+                    <li><a href="#">Доставка и оплата</a></li>
+                    <li><a href="#">Сертификаты качества</a></li>
+                    <li><a href="#">Экологические стандарты</a></li>
+                    <li><a href="#">Блог о грибах</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <div class="contact-info">
+                    <p>Москва, ул. Лесная, 15</p>
+                    <p>+7 (495) 123-45-67</p>
+                    <p>info@gribnoedem.ru</p>
+                    <p>Ежедневно 10:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2023 Грибной Эдем. Все права защищены.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Создание грибных спор
+        function createSpores() {
+            const sporesContainer = document.getElementById('spores-container');
+            const sporeCount = 20;
+            
+            for (let i = 0; i < sporeCount; i++) {
+                const spore = document.createElement('div');
+                spore.className = 'mushroom-spore';
+                
+                // Случайные параметры
+                const size = Math.random() * 10 + 5;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 20;
+                const duration = Math.random() * 30 + 20;
+                
+                spore.style.width = `${size}px`;
+                spore.style.height = `${size}px`;
+                spore.style.left = `${left}vw`;
+                spore.style.bottom = `-${size}px`;
+                spore.style.animation = `float ${duration}s linear ${delay}s infinite`;
+                spore.style.opacity = Math.random() * 0.4 + 0.1;
+                
+                sporesContainer.appendChild(spore);
+            }
+        }
+        
+        // Запуск анимации при загрузке
+        window.addEventListener('load', createSpores);
+        
+        // Плавное появление карточек
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.mushroom-card');
+            
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
